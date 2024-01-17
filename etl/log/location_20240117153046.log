@@ -1,0 +1,40 @@
+2024-01-17 15:30:46,969 Snowflake Connector for Python Version: 3.6.0, Python Version: 3.11.5, Platform: Windows-10-10.0.22621-SP0
+2024-01-17 15:30:46,969 This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-01-17 15:30:55,630 [INFO]: Started executing the script: location-Extract.py
+2024-01-17 15:30:55,630 [INFO]: Downloading the data for the source: LOCATION.
+2024-01-17 15:30:55,630 [INFO]: 
+            SELECT * FROM OLTP_RETAIL.SRC.LOCATION;
+        
+2024-01-17 15:30:55,630 query: [SELECT * FROM OLTP_RETAIL.SRC.LOCATION;]
+2024-01-17 15:30:55,735 query execution done
+2024-01-17 15:30:55,735 Number of results in first chunk: 4
+2024-01-17 15:30:55,736 [INFO]: Started PUT operation of files into Snowflake Stage.
+2024-01-17 15:30:55,736 [INFO]: USE DATABASE OLAP_RETAIL;
+2024-01-17 15:30:55,736 query: [USE DATABASE OLAP_RETAIL;]
+2024-01-17 15:30:55,837 query execution done
+2024-01-17 15:30:55,837 Number of results in first chunk: 1
+2024-01-17 15:30:55,837 [INFO]: USE SCHEMA DWH_STG;
+2024-01-17 15:30:55,837 query: [USE SCHEMA DWH_STG;]
+2024-01-17 15:30:55,933 query execution done
+2024-01-17 15:30:55,933 Number of results in first chunk: 1
+2024-01-17 15:30:55,934 [INFO]: CREATE OR REPLACE FILE FORMAT CSV_FORMAT TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_BY = '"' COMPRESSION = 'AUTO';
+2024-01-17 15:30:55,934 query: [CREATE OR REPLACE FILE FORMAT CSV_FORMAT TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_...]
+2024-01-17 15:30:56,050 query execution done
+2024-01-17 15:30:56,050 Number of results in first chunk: 1
+2024-01-17 15:30:56,050 [INFO]: CREATE OR REPLACE STAGE INTERNAL_STAGE_LOCATION file_format = CSV_FORMAT;
+2024-01-17 15:30:56,050 query: [CREATE OR REPLACE STAGE INTERNAL_STAGE_LOCATION file_format = CSV_FORMAT;]
+2024-01-17 15:30:56,222 query execution done
+2024-01-17 15:30:56,222 Number of results in first chunk: 1
+2024-01-17 15:30:56,223 [INFO]: PUT 'file://D:/Project/ETL_FRAMEWORK/etl/src/tmp/LOCATION.csv' @INTERNAL_STAGE_LOCATION;
+2024-01-17 15:30:56,223 query: [PUT 'file://D:/Project/ETL_FRAMEWORK/etl/src/tmp/LOCATION.csv' @INTERNAL_STAGE_L...]
+2024-01-17 15:30:57,163 query execution done
+2024-01-17 15:30:58,070 [INFO]: 
+            COPY INTO OLAP_RETAIL.DWH_LND.LOCATION
+            FROM @OLAP_RETAIL.DWH_STG.INTERNAL_STAGE_LOCATION
+            FILE_FORMAT = (FORMAT_NAME = CSV_FORMAT)
+        
+2024-01-17 15:30:58,072 query: [COPY INTO OLAP_RETAIL.DWH_LND.LOCATION FROM @OLAP_RETAIL.DWH_STG.INTERNAL_STAGE_...]
+2024-01-17 15:30:58,859 query execution done
+2024-01-17 15:30:58,859 Number of results in first chunk: 1
+2024-01-17 15:30:58,859 closed
+2024-01-17 15:30:58,918 No async queries seem to be running, deleting session
