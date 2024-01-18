@@ -22,6 +22,7 @@ try:
     snow.executeQuery(query)
 
     snow.copyIntoLanding()
+    logger.info(f"Extraction for {scriptPrefix.upper()} completed!")
         
 except Exception as e:
     logger.error(e)
